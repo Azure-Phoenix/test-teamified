@@ -13,7 +13,7 @@ const posts = [
       "Static logos are a thing of the past. We break down why motion is now a core brand asset, not an afterthought.",
     date: "12 June 2025",
     readTime: "5 min read",
-    color: "#1a1916",
+    color: "#2d4a3e",
   },
   {
     id: 2,

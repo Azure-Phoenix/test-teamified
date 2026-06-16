@@ -17,18 +17,20 @@ function TickerWord() {
   }, []);
 
   return (
+    // height + lineHeight both 1em so the clip box exactly matches one line of text
     <span
-      className="relative inline-block overflow-hidden"
-      style={{ height: "1.2em", verticalAlign: "bottom" }}
+      className="relative inline-block overflow-hidden align-middle"
+      style={{ height: "1em", lineHeight: 1 }}
     >
-      <AnimatePresence mode="wait" initial={false}>
+      {/* default (sync) mode — exit and enter overlap, no empty gap between words */}
+      <AnimatePresence initial={false}>
         <motion.span
           key={index}
-          initial={{ y: "100%", opacity: 0 }}
-          animate={{ y: "0%", opacity: 1 }}
-          exit={{ y: "-100%", opacity: 0 }}
-          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-          style={{ display: "block", whiteSpace: "nowrap" }}
+          initial={{ y: "100%" }}
+          animate={{ y: "0%" }}
+          exit={{ y: "-100%" }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          style={{ display: "block", whiteSpace: "nowrap", lineHeight: 1 }}
         >
           {disciplines[index]}
         </motion.span>
@@ -178,7 +180,7 @@ export default function Hero() {
           >
             <span className="tracking-widest uppercase text-xs">We do</span>
             <span
-              className="text-base font-medium inline-block w-[130px] overflow-hidden"
+              className="text-base font-medium"
               style={{ color: "var(--fg)" }}
             >
               <TickerWord />

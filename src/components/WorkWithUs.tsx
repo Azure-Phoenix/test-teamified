@@ -331,13 +331,23 @@ export default function WorkWithUs() {
                           />
                         </div>
                       ))}
-                      <button
-                        type="submit"
-                        className="w-full mt-2 py-3.5 rounded-xl text-sm tracking-widest uppercase font-medium flex items-center justify-center gap-2 transition-opacity hover:opacity-90"
-                        style={{ backgroundColor: "var(--accent)", color: "#fff" }}
-                      >
-                        Send Enquiry <ArrowRight size={13} />
-                      </button>
+                      <div className="flex items-center gap-3 mt-2">
+                        <button
+                          type="button"
+                          onClick={() => go(-1)}
+                          className="flex items-center gap-2 px-4 py-3.5 rounded-xl border text-xs tracking-widest uppercase transition-colors"
+                          style={{ borderColor: "var(--border)", color: "var(--muted)" }}
+                        >
+                          <ArrowLeft size={13} /> Back
+                        </button>
+                        <button
+                          type="submit"
+                          className="flex-1 py-3.5 rounded-xl text-xs tracking-widest uppercase font-medium flex items-center justify-center gap-2 transition-opacity hover:opacity-90"
+                          style={{ backgroundColor: "var(--accent)", color: "#fff" }}
+                        >
+                          Send Enquiry <ArrowRight size={13} />
+                        </button>
+                      </div>
                     </form>
                   )}
 

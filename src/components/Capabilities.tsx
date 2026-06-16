@@ -6,60 +6,108 @@ import { motion, useInView } from "framer-motion";
 const capabilities = [
   {
     number: "01",
-    title: "Brand Identity",
+    title: "Insights & Strategy",
     description:
-      "From naming and strategy through to visual identity systems. We build brands that are distinctive, flexible and built to last.",
-    services: ["Strategy", "Naming", "Visual Identity", "Brand Guidelines", "Verbal Identity"],
+      "Everything we do draws from a thoroughly researched and highly considered brand strategy. We uncover what makes a brand truly distinctive — then build on it.",
+    services: ["Brand Identity", "Brand Strategy", "Brand Architecture", "Brand Refresh & Evolution"],
   },
   {
     number: "02",
-    title: "Motion & 3D",
+    title: "Creative",
     description:
-      "We animate brands to life across every touchpoint. Broadcast, social, interactive — motion that communicates and captivates.",
-    services: ["Brand Animation", "3D Visualisation", "Social Content", "Video Direction"],
+      "Our work is renowned for the depth, quality and originality of its design-led thinking and storytelling. From identity to film — we make things that land.",
+    services: [
+      "Brand Identity & Guidelines",
+      "Motion & Animation",
+      "Art Direction",
+      "Naming & Copywriting",
+      "Packaging",
+      "Wayfinding",
+      "Film & Photography",
+    ],
   },
   {
     number: "03",
-    title: "Communications",
+    title: "Digital",
     description:
-      "Clear, compelling communications across every channel. We craft the right message for the right audience, every time.",
-    services: ["Campaign Strategy", "Copywriting", "PR & Media", "Content Strategy"],
+      "We craft insightful and highly detailed digital strategies focused on performance and optimisation. Beautiful experiences that convert.",
+    services: ["Website Design & Development", "UI/UX", "Analytics & Reporting"],
   },
   {
     number: "04",
-    title: "Digital",
+    title: "Data",
     description:
-      "Data-driven digital experiences that connect with audiences and convert. Social, web and beyond.",
-    services: ["Social Media", "Web Design", "Data Science", "Digital Advertising"],
+      "We use data to identify patterns of human behaviour, then apply those insights to shape smarter, more effective creative strategy.",
+    services: ["Data Gathering", "Insights Generation", "Analytics & Reporting"],
+  },
+  {
+    number: "05",
+    title: "Social Media",
+    description:
+      "We transform clients' social media presence and performance into a highly focused and effective source of conversions — strategy through to execution.",
+    services: [
+      "Strategy & Creative",
+      "Paid & Organic Social",
+      "Launch & Activation",
+      "Campaign Development",
+    ],
+  },
+  {
+    number: "06",
+    title: "Communications",
+    description:
+      "We craft intelligent communication ecosystems that connect brands and audiences through the right message, at the right time, on the right channel.",
+    services: [
+      "CRM Strategy",
+      "Email Marketing",
+      "Automated Campaigns",
+      "SMS",
+      "Journey Mapping",
+      "Database Management",
+    ],
+  },
+  {
+    number: "07",
+    title: "3D & Motion",
+    description:
+      "Industry-leading 3D CGI animations and stills for product, architectural and branding projects. Plus AR/VR and interactive media.",
+    services: ["3D CGI Animation & Stills", "Architectural Visualisation", "AR/VR", "Interactive Media"],
+  },
+  {
+    number: "08",
+    title: "Videography",
+    description:
+      "Brand, lifestyle, architectural and product films — cinematic storytelling that elevates every brand touchpoint.",
+    services: ["Brand Films", "Lifestyle & Product", "Drone Cinematography", "Post-Production"],
   },
 ];
 
 const stats = [
-  { value: "5+", label: "Years in studio" },
+  { value: "20+", label: "Talented creatives" },
   { value: "100+", label: "Projects delivered" },
-  { value: "60+", label: "Brands elevated" },
-  { value: "12", label: "Team members" },
+  { value: "8", label: "Studio capabilities" },
+  { value: "1", label: "Studio hound (Harvey)" },
 ];
 
 function CapabilityRow({ cap, index }: { cap: (typeof capabilities)[0]; index: number }) {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const inView = useInView(ref, { once: true, margin: "-40px" });
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 30 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.6, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
       className="group border-t py-8 md:py-10 grid md:grid-cols-[80px_1fr_1fr] gap-6 items-start cursor-default"
       style={{ borderColor: "var(--border)" }}
     >
-      <span className="text-xs tracking-widest" style={{ color: "var(--muted)" }}>
+      <span className="text-xs tracking-widest pt-1" style={{ color: "var(--muted)" }}>
         {cap.number}
       </span>
       <div>
         <h3
-          className="text-2xl md:text-3xl font-light mb-3 transition-colors duration-300 group-hover:text-[var(--accent)]"
+          className="text-xl md:text-2xl font-light mb-3 transition-colors duration-300 group-hover:text-[color:var(--accent)]"
           style={{ color: "var(--fg)" }}
         >
           {cap.title}
@@ -72,7 +120,7 @@ function CapabilityRow({ cap, index }: { cap: (typeof capabilities)[0]; index: n
         {cap.services.map((s) => (
           <span
             key={s}
-            className="text-xs tracking-wide px-3 py-1.5 rounded-full border"
+            className="text-[11px] tracking-wide px-3 py-1.5 rounded-full border"
             style={{ borderColor: "var(--border)", color: "var(--muted)" }}
           >
             {s}
@@ -104,7 +152,7 @@ export default function Capabilities() {
             className="text-xs tracking-[0.3em] uppercase mb-4"
             style={{ color: "var(--accent)" }}
           >
-            What We Do
+            Capability
           </motion.p>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <motion.h2
@@ -113,7 +161,7 @@ export default function Capabilities() {
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="text-[clamp(2.5rem,5vw,4.5rem)] font-light leading-none"
             >
-              Here's what
+              Here&apos;s what
               <br />
               <span className="italic" style={{ color: "var(--accent)" }}>
                 we can do.
@@ -126,7 +174,7 @@ export default function Capabilities() {
               className="max-w-sm text-sm leading-relaxed"
               style={{ color: "var(--muted)" }}
             >
-              We're designers, writers, 3D and motion artists, data scientists, social media experts
+              We&apos;re designers, writers, 3D and motion artists, data scientists, social media experts
               and strategists — all under one roof.
             </motion.p>
           </div>

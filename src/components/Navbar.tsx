@@ -5,9 +5,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "./ThemeProvider";
 import { Moon, Sun, Menu, X } from "lucide-react";
 
+// Nav labels match the original site: Work, Capability (singular), Team, Contact
+// + Insights as the new added section
 const links = [
   { label: "Work", href: "#work" },
-  { label: "Capabilities", href: "#capabilities" },
+  { label: "Capability", href: "#capabilities" },
   { label: "Team", href: "#team" },
   { label: "Insights", href: "#insights" },
   { label: "Contact", href: "#contact" },

@@ -2,11 +2,11 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Share2, ExternalLink, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
-const footerLinks = [
+const navLinks = [
   { label: "Work", href: "#work" },
-  { label: "Capabilities", href: "#capabilities" },
+  { label: "Capability", href: "#capabilities" },
   { label: "Team", href: "#team" },
   { label: "Insights", href: "#insights" },
   { label: "Contact", href: "#contact" },
@@ -22,7 +22,7 @@ export default function Footer() {
       style={{ borderTop: "1px solid var(--border)" }}
     >
       <div className="max-w-7xl mx-auto">
-        {/* Big CTA */}
+        {/* Large CTA */}
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 40 }}
@@ -30,40 +30,46 @@ export default function Footer() {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="mb-16"
         >
-          <p className="text-xs tracking-[0.3em] uppercase mb-4" style={{ color: "var(--muted)" }}>
-            Ready?
+          <p
+            className="text-xs tracking-[0.3em] uppercase mb-4"
+            style={{ color: "var(--muted)" }}
+          >
+            Ready to start?
           </p>
           <a
-            href="#contact"
-            className="group inline-flex items-end gap-4 text-[clamp(2.5rem,7vw,6rem)] font-light leading-none hover:text-[var(--accent)] transition-colors duration-300"
+            href="mailto:hello@playgroundstudio.com.au"
+            className="group inline-flex items-end gap-4 text-[clamp(2rem,6vw,5.5rem)] font-light leading-none transition-colors duration-300 hover:text-[color:var(--accent)]"
             style={{ color: "var(--fg)" }}
           >
-            Let's work together
+            Let&apos;s work together
             <ArrowUpRight
-              className="mb-2 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
-              size={40}
+              className="mb-1 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+              size={36}
             />
           </a>
         </motion.div>
 
-        {/* Footer bottom row */}
+        {/* Bottom row */}
         <div
           className="flex flex-col md:flex-row md:items-center justify-between gap-8 pt-8 border-t"
           style={{ borderColor: "var(--border)" }}
         >
-          {/* Logo & copyright */}
+          {/* Brand + copyright */}
           <div>
-            <p className="text-sm font-bold tracking-[0.2em] uppercase mb-1" style={{ color: "var(--fg)" }}>
-              Playground<span style={{ color: "var(--accent)" }}>.</span>
+            <p
+              className="text-sm font-bold tracking-[0.2em] uppercase mb-1"
+              style={{ color: "var(--fg)" }}
+            >
+              Playground Studio
             </p>
             <p className="text-xs" style={{ color: "var(--muted)" }}>
-              © {new Date().getFullYear()} Playground Studio. All rights reserved.
+              © PLAYGROUND STUDIO {new Date().getFullYear()}
             </p>
           </div>
 
           {/* Nav */}
           <nav className="flex flex-wrap gap-x-6 gap-y-2">
-            {footerLinks.map((l) => (
+            {navLinks.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
@@ -77,48 +83,50 @@ export default function Footer() {
             ))}
           </nav>
 
-          {/* Social */}
-          <div className="flex items-center gap-3">
+          {/* Social — text links matching original site style */}
+          <div className="flex items-center gap-4">
             <a
               href="https://instagram.com/_PLAYGROUNDSTUDIO"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-9 h-9 rounded-full border flex items-center justify-center transition-colors"
-              style={{ borderColor: "var(--border)", color: "var(--muted)" }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "var(--accent)";
-                e.currentTarget.style.color = "var(--accent)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "var(--border)";
-                e.currentTarget.style.color = "var(--muted)";
-              }}
+              className="text-xs tracking-widest uppercase transition-colors"
+              style={{ color: "var(--muted)" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--fg)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--muted)")}
             >
-              <Share2 size={14} />
+              Instagram
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://linkedin.com/company/playground-studio"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-9 h-9 rounded-full border flex items-center justify-center transition-colors"
-              style={{ borderColor: "var(--border)", color: "var(--muted)" }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "var(--accent)";
-                e.currentTarget.style.color = "var(--accent)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "var(--border)";
-                e.currentTarget.style.color = "var(--muted)";
-              }}
+              className="text-xs tracking-widest uppercase transition-colors"
+              style={{ color: "var(--muted)" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--fg)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--muted)")}
             >
-              <ExternalLink size={14} />
+              LinkedIn
+            </a>
+            <a
+              href="/privacy-policy"
+              className="text-xs tracking-widest uppercase transition-colors"
+              style={{ color: "var(--muted)" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--fg)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--muted)")}
+            >
+              Privacy
             </a>
           </div>
         </div>
 
-        {/* Acknowledgement */}
-        <p className="text-[11px] mt-8 leading-relaxed max-w-2xl" style={{ color: "var(--muted)" }}>
-          Playground Studio acknowledges the Gadigal people of the Eora Nation as the traditional custodians of the land on which we work. We pay our respects to Elders past, present and emerging.
+        {/* Acknowledgement — correct Country for South Melbourne */}
+        <p
+          className="text-[11px] mt-8 leading-relaxed max-w-2xl"
+          style={{ color: "var(--muted)" }}
+        >
+          Playground Studio acknowledges the Boon Wurrung people of the Kulin Nation as the
+          traditional custodians of the land on which we work. We pay our respects to Elders past,
+          present and emerging.
         </p>
       </div>
     </footer>

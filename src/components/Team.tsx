@@ -1,0 +1,167 @@
+"use client";
+
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { ExternalLink, Share2 } from "lucide-react";
+
+const team = [
+  {
+    name: "Alex Rivera",
+    role: "Creative Director",
+    bio: "15 years shaping brands for global clients. Obsessed with the intersection of culture and commerce.",
+    color: "#c8a882",
+    initials: "AR",
+  },
+  {
+    name: "Sam Chen",
+    role: "Head of Motion",
+    bio: "3D and animation lead. If it moves, Sam probably made it look better.",
+    color: "#8aad9f",
+    initials: "SC",
+  },
+  {
+    name: "Jordan Lee",
+    role: "Strategy Director",
+    bio: "Former McKinsey. Now uses data to make creative decisions that actually work.",
+    color: "#8a6fa0",
+    initials: "JL",
+  },
+  {
+    name: "Mia Nguyen",
+    role: "Brand Designer",
+    bio: "Typography nerd. Logo lover. Makes every pixel count.",
+    color: "#d4927a",
+    initials: "MN",
+  },
+];
+
+const values = [
+  { label: "Make it move", desc: "We believe static thinking produces static results." },
+  { label: "Be direct", desc: "Clear communication — in the work and in the studio." },
+  { label: "Stay curious", desc: "Every brief is a chance to learn something new." },
+  { label: "Show up fully", desc: "We care about the work because we care about each other." },
+];
+
+export default function Team() {
+  const headingRef = useRef(null);
+  const inView = useInView(headingRef, { once: true });
+  const valuesRef = useRef(null);
+  const valuesInView = useInView(valuesRef, { once: true });
+
+  return (
+    <section id="team" className="py-24 md:py-36 px-6 md:px-10">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div ref={headingRef} className="mb-16">
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            className="text-xs tracking-[0.3em] uppercase mb-4"
+            style={{ color: "var(--accent)" }}
+          >
+            The People
+          </motion.p>
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="text-[clamp(2.5rem,5vw,4.5rem)] font-light leading-none max-w-3xl"
+          >
+            A team of{" "}
+            <span className="italic" style={{ color: "var(--accent)" }}>
+              makers
+            </span>{" "}
+            and thinkers.
+          </motion.h2>
+        </div>
+
+        {/* Team grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
+          {team.map((member, i) => (
+            <motion.div
+              key={member.name}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.7, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className="group"
+            >
+              {/* Avatar */}
+              <div
+                className="relative aspect-square rounded-2xl mb-4 flex items-center justify-center overflow-hidden"
+                style={{ backgroundColor: member.color }}
+              >
+                <span className="text-4xl font-light text-white/80 select-none">
+                  {member.initials}
+                </span>
+                {/* Social hover overlay */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileHover={{ opacity: 1 }}
+                  className="absolute inset-0 flex items-end justify-start gap-3 p-4"
+                  style={{ background: "linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%)" }}
+                >
+                  <a
+                    href="#"
+                    className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/40 transition-colors"
+                  >
+                    <Share2 size={13} />
+                  </a>
+                  <a
+                    href="#"
+                    className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/40 transition-colors"
+                  >
+                    <ExternalLink size={13} />
+                  </a>
+                </motion.div>
+              </div>
+
+              <h3 className="font-medium text-base" style={{ color: "var(--fg)" }}>
+                {member.name}
+              </h3>
+              <p className="text-sm mb-2" style={{ color: "var(--accent)" }}>
+                {member.role}
+              </p>
+              <p className="text-xs leading-relaxed" style={{ color: "var(--muted)" }}>
+                {member.bio}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Values */}
+        <div
+          ref={valuesRef}
+          className="rounded-3xl p-8 md:p-12"
+          style={{ backgroundColor: "var(--surface)" }}
+        >
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={valuesInView ? { opacity: 1 } : {}}
+            className="text-xs tracking-[0.3em] uppercase mb-8"
+            style={{ color: "var(--accent)" }}
+          >
+            How We Work
+          </motion.p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+            {values.map((v, i) => (
+              <motion.div
+                key={v.label}
+                initial={{ opacity: 0, y: 30 }}
+                animate={valuesInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+              >
+                <h4 className="text-lg font-medium mb-2" style={{ color: "var(--fg)" }}>
+                  {v.label}
+                </h4>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
+                  {v.desc}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

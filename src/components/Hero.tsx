@@ -1,42 +1,38 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 
 const disciplines = ["Design.", "Motion.", "Brand.", "Strategy.", "Change."];
 
-// Fix: y keyframes must match number of children (disciplines.length + 1 for the looping clone)
 function TickerWord() {
-  const count = disciplines.length;
-  // keyframes: 0%, -100%, -200%, -300%, -400% for 5 items → 5 keyframe values
-  const yKeyframes = disciplines.map((_, i) => `-${i * 100}%`);
-  // times must have same length as y keyframes
-  const times = disciplines.map((_, i) => i / count);
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setIndex((i) => (i + 1) % disciplines.length);
+    }, 2000);
+    return () => clearInterval(id);
+  }, []);
 
   return (
-    <span className="relative overflow-hidden inline-block" style={{ height: "1.1em", verticalAlign: "bottom" }}>
-      <motion.span
-        className="flex flex-col"
-        animate={{ y: yKeyframes }}
-        transition={{
-          duration: count * 2,
-          repeat: Infinity,
-          ease: "linear",
-          times,
-          repeatType: "loop",
-        }}
-        style={{ display: "flex", flexDirection: "column" }}
-      >
-        {[...disciplines, disciplines[0]].map((w, i) => (
-          <span
-            key={i}
-            style={{ height: "1.1em", lineHeight: "1.1", display: "block", whiteSpace: "nowrap" }}
-          >
-            {w}
-          </span>
-        ))}
-      </motion.span>
+    <span
+      className="relative inline-block overflow-hidden"
+      style={{ height: "1.2em", verticalAlign: "bottom" }}
+    >
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.span
+          key={index}
+          initial={{ y: "100%", opacity: 0 }}
+          animate={{ y: "0%", opacity: 1 }}
+          exit={{ y: "-100%", opacity: 0 }}
+          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          style={{ display: "block", whiteSpace: "nowrap" }}
+        >
+          {disciplines[index]}
+        </motion.span>
+      </AnimatePresence>
     </span>
   );
 }

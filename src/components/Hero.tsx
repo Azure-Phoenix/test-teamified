@@ -6,31 +6,33 @@ import { ArrowDown } from "lucide-react";
 
 const disciplines = ["Design.", "Motion.", "Brand.", "Strategy.", "Change."];
 
+// Longest word keeps the container size stable so layout never shifts
+const longestDiscipline = disciplines.reduce((a, b) => (a.length > b.length ? a : b));
+
 function TickerWord() {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
     const id = setInterval(() => {
       setIndex((i) => (i + 1) % disciplines.length);
-    }, 2000);
+    }, 2200);
     return () => clearInterval(id);
   }, []);
 
   return (
-    // height + lineHeight both 1em so the clip box exactly matches one line of text
-    <span
-      className="relative inline-block overflow-hidden align-middle"
-      style={{ height: "1em", lineHeight: 1 }}
-    >
-      {/* default (sync) mode — exit and enter overlap, no empty gap between words */}
-      <AnimatePresence initial={false}>
+    <span className="relative inline-block">
+      {/* Invisible longest word locks container width & height — never changes size */}
+      <span className="invisible whitespace-nowrap">{longestDiscipline}</span>
+
+      {/* Animated word sits absolutely on top, perfectly centred */}
+      <AnimatePresence mode="wait" initial={false}>
         <motion.span
           key={index}
-          initial={{ y: "100%" }}
-          animate={{ y: "0%" }}
-          exit={{ y: "-100%" }}
-          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          style={{ display: "block", whiteSpace: "nowrap", lineHeight: 1 }}
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -6 }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+          className="absolute inset-0 flex items-center whitespace-nowrap"
         >
           {disciplines[index]}
         </motion.span>

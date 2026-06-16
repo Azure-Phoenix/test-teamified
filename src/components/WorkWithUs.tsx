@@ -182,8 +182,8 @@ export default function WorkWithUs() {
 
           {/* Right — animated multi-step enquiry form */}
           <div
-            className="rounded-3xl p-8 md:p-10 overflow-hidden"
-            style={{ backgroundColor: "var(--surface)" }}
+            className="rounded-3xl overflow-hidden relative"
+            style={{ backgroundColor: "var(--surface)", height: 560 }}
           >
             <AnimatePresence mode="wait" custom={direction}>
               {submitted ? (
@@ -191,7 +191,7 @@ export default function WorkWithUs() {
                   key="success"
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="flex flex-col items-center justify-center py-12 text-center"
+                  className="absolute inset-0 flex flex-col items-center justify-center p-10 text-center"
                 >
                   <motion.div
                     initial={{ scale: 0 }}
@@ -218,6 +218,7 @@ export default function WorkWithUs() {
                   animate="center"
                   exit="exit"
                   transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                  className="absolute inset-0 p-8 md:p-10 overflow-y-auto"
                 >
                   {/* Step progress dots */}
                   <div className="flex items-center justify-between mb-8">

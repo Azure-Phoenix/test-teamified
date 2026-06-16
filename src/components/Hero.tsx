@@ -182,7 +182,7 @@ export default function Hero() {
           >
             <span className="tracking-widest uppercase text-xs">We do</span>
             <span
-              className="text-base font-medium min-w-[110px]"
+              className="text-base font-medium inline-block w-[130px] overflow-hidden"
               style={{ color: "var(--fg)" }}
             >
               <TickerWord />

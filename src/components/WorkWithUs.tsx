@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, ArrowRight, ArrowLeft, MapPin, Mail, Phone } from "lucide-react";
 
@@ -69,9 +69,15 @@ export default function WorkWithUs() {
     setStep((s) => Math.min(Math.max(s + dir, 0), steps.length - 1));
   };
 
+  const advanceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   const selectOption = (label: string) => {
     setAnswers((a) => ({ ...a, [current.id]: label }));
-    if (step < steps.length - 1) setTimeout(() => go(1), 220);
+    if (step < steps.length - 1) {
+      // Cancel any pending advance so rapid clicks don't stack up go(1) calls
+      if (advanceTimer.current) clearTimeout(advanceTimer.current);
+      advanceTimer.current = setTimeout(() => go(1), 220);
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
